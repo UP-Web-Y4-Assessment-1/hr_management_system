@@ -36,6 +36,7 @@ class TrainersController extends Controller
 
         DB::beginTransaction();
         try {
+            
 
             $trainer = new Trainer;
             $trainer->full_name    = $request->full_name;

@@ -27,7 +27,7 @@
             <!-- /Page Header -->
             
             <!-- Search Filter -->
-            <div class="row filter-row">
+            <!-- <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">  
                     <div class="form-group form-focus">
                         <div class="cal-icon">
@@ -58,7 +58,33 @@
                 <div class="col-sm-6 col-md-3">  
                     <a href="#" class="btn btn-success btn-block"> Search </a>  
                 </div>     
-            </div>
+            </div> -->
+            <form action="{{ route('estimates/search') }}" method="POST">
+                @csrf
+                <div class="row filter-row">
+                 
+                    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                        <div class="form-group form-focus">
+                            <div class="cal-icon">
+                                <input class="form-control floating datetimepicker" type="text" name="from_date">
+                            </div>
+                            <label class="focus-label">From</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+                        <div class="form-group form-focus">
+                            <div class="cal-icon">
+                                <input class="form-control floating datetimepicker" type="text" name="to_date">
+                            </div>
+                            <label class="focus-label">To</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+                        <button type="submit" class="btn btn-success btn-block">Search</button>
+                    </div>
+                </div>
+            </form>  
             <!-- /Search Filter -->
             
             <div class="row">

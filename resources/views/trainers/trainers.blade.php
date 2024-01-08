@@ -125,7 +125,12 @@
                                             @foreach ($user as $key=>$items )
                                                 <option value="{{ $items->name }} {{ old('full_name') == $items->name ? 'selected' : '' }}" data-trainer_id={{ $items->user_id }} data-email={{ $items->email }}>{{ $items->name }}</option>
                                             @endforeach
+                                            <option value="other">Other</option>
                                         </select>
+                                        <div id="otherFullNameInput" style="display: none;">
+                                             <label class="col-form-label">Other Full Name</label>
+                                           <input type="text" class="form-control" name="full_name_input" id="full_name_input">
+                                           </div>
                                     </div>
                                 </div>
                                 <input type="hidden" class="form-control" id="trainer_id" name="trainer_id" readonly>
@@ -274,6 +279,26 @@
     </div>
     <!-- /Page Wrapper -->
     @section('script')
+
+    <script>
+    $(document).ready(function () {
+        $('#trainer').on('change', function () {
+            var selectedOption = $(this).find(':selected');
+            var selectedValue = selectedOption.val();
+
+            if (selectedValue === 'other') {
+                $('#otherFullNameInput').show();
+                $('#email').prop('readonly', false); // Allow input when "Other" is selected
+            } else {
+                $('#otherFullNameInput').hide();
+                $('#full_name_input').val(''); // Clear the input field when a regular option is selected
+                $('#email').prop('readonly', true); // Make the email input readonly when a regular option is selected
+            }
+
+        });
+    });
+</script>
+
     <script>
         // select auto id and email
         $('#e_trainer').on('change',function()
@@ -285,11 +310,31 @@
 
     <script>
         // select auto id and email update
-        $('#trainer').on('change',function()
-        {
-            $('#trainer_id').val($(this).find(':selected').data('trainer_id'));
-            $('#email').val($(this).find(':selected').data('email'));
-        });
+        // $('#trainer').on('change',function()
+        // {
+        //     $('#trainer_id').val($(this).find(':selected').data('trainer_id'));
+        //     $('#email').val($(this).find(':selected').data('email'));
+        // });
+       
+       
+        // Select auto id and email update
+$('#trainer').on('change', function() {
+    var selectedOption = $(this).find(':selected');
+    var selectedValue = selectedOption.val();
+
+    if (selectedValue === 'other') {
+        // If "Other" is selected, get the email from the input field
+        $('#email').val($('#email').val());
+        $('#full_name_input').val($('#full_name_input').val());
+    } else {
+        // Use the email from the selected option
+        $('#email').val(selectedOption.data('email'));
+    }
+
+    // Update trainer_id as usual
+    $('#trainer_id').val(selectedOption.data('trainer_id'));
+});
+
     </script>
 
     {{-- update script --}}

@@ -309,6 +309,7 @@ class SalesController extends Controller
     public function searchRecord(Request $request)
     {
         $data = DB::table('expenses')->get();
+        $user = DB::table('users')->get();
 
         // search by item name
         if(!empty($request->item_name) && empty($request->from_date) && empty($request->to_data))
@@ -330,6 +331,24 @@ class SalesController extends Controller
                             ->get();
         }
 
-        return view('sales.expenses',compact('data'));
+        return view('sales.expenses',compact('data', 'user'));
+    }
+
+    public function searchEstimate(Request $request)
+    {
+        $data = DB::table('expenses')->get();
+        $user = DB::table('users')->get();
+        $estimates = DB::table('estimates')->get();
+
+
+
+        // search by from_date to_data
+        if(empty($request->item_name) && !empty($request->from_date) && !empty($request->to_date))
+        {
+            $estimates = Estimates::whereBetween('estimate_date',[$request->from_date, $request->to_date])->get();
+        }
+        
+
+        return view('sales.estimates',compact('user', 'estimates'));
     }
 }

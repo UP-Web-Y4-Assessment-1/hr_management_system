@@ -12,6 +12,7 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <h3 class="page-title">Expenses</h3>
+                        <h3 class="page-title">Expenses</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                             <li class="breadcrumb-item active">Expenses</li>
@@ -278,8 +279,9 @@
                                     <div class="form-group">
                                         <label>Purchased By</label>
                                         <select class="select" name="purchased_by" id="e_purchased_by">
-                                            <option>Daniel Porter</option>
-                                            <option>Roger Dixon</option>
+                                        @foreach ($user as $items )
+                                                <option value="{{ $items->name }}" data-trainer_id={{ $items->user_id }}>{{ $items->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

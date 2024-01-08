@@ -294,6 +294,10 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
             // ---------------------- search expenses  ---------------//
         Route::get('expenses/search', 'searchRecord')->middleware('auth')->name('expenses/search');
         Route::post('expenses/search', 'searchRecord')->middleware('auth')->name('expenses/search');
+
+        // ---------------------- search expenses  ---------------//
+        Route::get('estimates/search', 'searchEstimate')->middleware('auth')->name('estimates/search');
+        Route::post('estimates/search','searchEstimate')->middleware('auth')->name('estimates/search');
         
     });
 
