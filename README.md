@@ -9,7 +9,7 @@
 
 ## To run the project
 - Run composer update
-- Run cp .env.example .env (change the databse config here)
+- Run cp .env.example .env (change the database config here)
 - Run php artisan key:generate
 - Run php artisan migrate
 - Run php artisan serve
